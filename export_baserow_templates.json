@@ -1,0 +1,237 @@
+{
+  "name": "export baserow templates",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://api.baserow.io/api/applications/{{ $json.query.database_id }}/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={\n\"Authorization\": \"{{ $('Start export').first().json.headers.token }}\"\n}",
+        "options": {}
+      },
+      "id": "46d4bc56-89c3-4e22-835e-11ee9465e147",
+      "name": "Get database",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        520,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.baserow.io/api/database/tables/database/{{ $('Get database').first().json.id }}/ ",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={ \"Authorization\": \"{{ $('Start export').first().json.headers.token }}\" }",
+        "options": {}
+      },
+      "id": "c07b7f86-edfa-4585-af85-e418d6ce22b5",
+      "name": "Get tables",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        780,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.baserow.io/api/database/fields/table/{{ $json.id }}/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={ \"Authorization\": \"{{ $('Start export').first().json.headers.token }}\" }",
+        "options": {}
+      },
+      "id": "98f7ab6e-56cb-435c-a812-f26e9250c59c",
+      "name": "Get table fields",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1060,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "path": "export-db",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "322647d4-86ef-4beb-829b-8807f0fc1c4a",
+      "name": "Start export",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        260,
+        -60
+      ],
+      "webhookId": "8c15d52f-46db-4e35-829f-7a0a1b5fc021"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "d810529f-57dd-4338-a1ea-bf0cb5748792",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.baserow.io/api/database/views/table/{{ $json.id }}/?include=filters,sortings,decorations ",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={ \"Authorization\": \"{{ $('Start export').first().json.headers.token }}\" }",
+        "options": {}
+      },
+      "id": "b4c4c5d6-9525-4129-a38c-c9ee0950b16e",
+      "name": "Get table views",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1060,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.baserow.io/api/database/rows/table/{{ $json.id }}/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={ \"Authorization\": \"{{ $('Start export').first().json.headers.token }}\" }",
+        "options": {}
+      },
+      "id": "3bd8a77b-de04-4543-a7b9-93d7061974f1",
+      "name": "Get table data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1060,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const export_db = {database: '', tables: []};\n\nexport_db.database = $('Get database').first().json.name;\n\nexport_db.tables = $('Get tables').all().map(i => i.json);\nfor (let table of export_db.tables) {\n  table.fields = [];\n  table.views = [];\n  table.data = [];\n}\n\nconst table_fields = $('Get table fields').all().map(i => i.json);\nfor (let field of table_fields) {\n\n  const table = export_db.tables.filter(t => t.id == field.table_id)[0];\n  table.fields.push(field)\n}\n\nconst table_views = $('Get table views').all().map(i => i.json);\nfor(let view of table_views){\n    const table = export_db.tables.filter(t => t.id == view.table_id)[0];\n    table.views.push(view)\n}\n\nconst table_data = $('Get table data').all().map(i => i.json.results);\nconsole.log(table_data)\n\nfor (let index = 0; index < table_data.length; index++) {\n  export_db.tables[index].data = table_data[index];\n}\n\nconsole.log(export_db)\nreturn export_db;"
+      },
+      "id": "16b6530d-e70d-4e71-b087-1dbdae3806dc",
+      "name": "Parse database data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        -60
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get tables": {
+      "main": [
+        [
+          {
+            "node": "Get table fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get table views",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get table data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start export": {
+      "main": [
+        [
+          {
+            "node": "Get database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get database": {
+      "main": [
+        [
+          {
+            "node": "Get tables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get table fields": {
+      "main": [
+        [
+          {
+            "node": "Parse database data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get table views": {
+      "main": [
+        [
+          {
+            "node": "Parse database data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get table data": {
+      "main": [
+        [
+          {
+            "node": "Parse database data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse database data": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "5161b220-8c16-4c75-a092-2a7d9dbe3ee8",
+  "id": "7",
+  "meta": {
+    "instanceId": "a6f8f7551255bcba36d0cc6bb130b02a70e30c6d289b18874a5dbca6d3479225"
+  },
+  "tags": []
+}
