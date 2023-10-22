@@ -1,0 +1,4 @@
+{
+	"data": {{FileImport.files[0]}},
+	"workspace": {{SelectImportWorkspace.selectedOptionValue}}
+}

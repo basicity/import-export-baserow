@@ -1,0 +1,24 @@
+{
+  "unpublishedCollection": {
+    "name": "DownloadExport",
+    "pageId": "Page1",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "actions": [],
+    "archivedActions": [],
+    "variables": [
+      {
+        "name": "myVar1",
+        "value": "[]"
+      },
+      {
+        "name": "myVar2",
+        "value": "{}"
+      }
+    ],
+    "userPermissions": []
+  },
+  "id": "Page1_DownloadExport",
+  "deleted": false,
+  "gitSyncId": "6533ac8d517d1f5679b748e5_6534972de6049d1188b0ff5b"
+}
