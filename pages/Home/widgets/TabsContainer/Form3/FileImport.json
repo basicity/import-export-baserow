@@ -3,6 +3,7 @@
     "mobileBottomRow": 6,
     "widgetName": "FileImport",
     "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+    "dynamicPropertyPathList": [],
     "displayName": "FilePicker",
     "iconSVG": "https://appcdn.appsmith.com/static/media/icon.715769b31db833b32f40d9c90ec02de3.svg",
     "searchTags": ["upload"],
@@ -10,15 +11,12 @@
     "bottomRow": 4,
     "parentRowSpace": 10,
     "type": "FILE_PICKER_WIDGET_V2",
-    "allowedFileTypes": [
-        "text/*",
-        "*"
-    ],
+    "allowedFileTypes": ["*"],
     "hideCard": false,
     "mobileRightColumn": 6.632,
     "animateLoading": true,
     "parentColumnSpace": 16.328125,
-    "dynamicTriggerPathList": [],
+    "dynamicTriggerPathList": [{"key": "onFilesSelected"}],
     "leftColumn": 0,
     "dynamicBindingPathList": [
         {"key": "buttonColor"},
@@ -26,6 +24,7 @@
     ],
     "isDisabled": false,
     "key": "rdnxt45uvi",
+    "onFilesSelected": "",
     "isRequired": true,
     "isDeprecated": false,
     "rightColumn": 12.10273327049953,
@@ -49,5 +48,5 @@
     "mobileLeftColumn": 0,
     "files": [],
     "alignment": "start",
-    "maxNumFiles": 1
+    "maxNumFiles": "1"
 }

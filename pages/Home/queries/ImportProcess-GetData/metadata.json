@@ -2,8 +2,8 @@
   "pluginType": "JS",
   "pluginId": "js-plugin",
   "unpublishedAction": {
-    "name": "myFun2",
-    "fullyQualifiedName": "DownloadExport.myFun2",
+    "name": "GetData",
+    "fullyQualifiedName": "ImportProcess.GetData",
     "datasource": {
       "name": "UNUSED_DATASOURCE",
       "pluginId": "js-plugin",
@@ -14,7 +14,7 @@
       "userPermissions": []
     },
     "pageId": "Home",
-    "collectionId": "Home_DownloadExport",
+    "collectionId": "Home_ImportProcess",
     "actionConfiguration": {
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
@@ -23,7 +23,6 @@
       "jsArguments": []
     },
     "executeOnLoad": false,
-    "clientSideExecution": true,
     "dynamicBindingPathList": [
       {
         "key": "body"
@@ -35,10 +34,9 @@
     "userSetOnLoad": false,
     "confirmBeforeExecute": false,
     "policies": [],
-    "userPermissions": [],
-    "createdAt": "2023-10-22T03:29:49Z"
+    "userPermissions": []
   },
-  "id": "Home_DownloadExport.myFun2",
+  "id": "Home_ImportProcess.GetData",
   "deleted": false,
-  "gitSyncId": "6533ac8d517d1f5679b748e5_6534972de6049d1188b0ff58"
+  "gitSyncId": "6533ac8d517d1f5679b748e5_6539df61f0af3a39eb18047f"
 }

@@ -2,12 +2,11 @@
   "pluginType": "API",
   "pluginId": "restapi-plugin",
   "unpublishedAction": {
-    "name": "TriggerImportWebhook",
+    "name": "TriggerUpdateFields",
     "datasource": {
       "name": "DEFAULT_REST_DATASOURCE",
       "pluginId": "restapi-plugin",
       "datasourceConfiguration": {
-        "sshProxyEnabled": false,
         "url": "https://basicity.app.n8n.cloud"
       },
       "invalids": [],
@@ -19,9 +18,9 @@
     },
     "pageId": "Home",
     "actionConfiguration": {
-      "timeoutInMillisecond": 10000,
+      "timeoutInMillisecond": 60000,
       "paginationType": "NONE",
-      "path": "/webhook-test/import-db",
+      "path": "/webhook/update-field-type",
       "headers": [
         {
           "key": "token",
@@ -36,7 +35,7 @@
       ],
       "encodeParamsToggle": true,
       "queryParameters": [],
-      "body": "{\n\t\"data\": {{FileImport.files[0]}},\n\t\"workspace\": {{SelectImportWorkspace.selectedOptionValue}}\n}",
+      "body": "{\n\t\"data\": {{ImportProcess.fields_to_import}}\n}",
       "bodyFormData": [],
       "httpMethod": "POST",
       "selfReferencingDataPaths": [],
@@ -46,7 +45,7 @@
         }
       ],
       "formData": {
-        "apiContentType": "application/json"
+        "apiContentType": "none"
       }
     },
     "executeOnLoad": false,
@@ -62,17 +61,16 @@
     "invalids": [],
     "messages": [],
     "jsonPathKeys": [
-      "FileImport.files[0]",
-      "InputToken.text",
-      "SelectImportWorkspace.selectedOptionValue"
+      "ImportProcess.fields_to_import",
+      "InputToken.text"
     ],
     "userSetOnLoad": false,
     "confirmBeforeExecute": false,
     "policies": [],
     "userPermissions": [],
-    "createdAt": "2023-10-22T03:39:11Z"
+    "createdAt": "2023-10-24T13:26:04Z"
   },
-  "id": "Home_TriggerImportWebhook",
+  "id": "Home_TriggerUpdateFields",
   "deleted": false,
-  "gitSyncId": "6533ac8d517d1f5679b748e5_6534995f8a039554f84d6215"
+  "gitSyncId": "6533ac8d517d1f5679b748e5_6537c5ec8f91215846f9ae08"
 }

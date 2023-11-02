@@ -8,7 +8,7 @@
     "iconSVG": "https://appcdn.appsmith.com/static/media/icon.e17c486a34778f3bae299c9110e00cf6.svg",
     "searchTags": ["group"],
     "topRow": 0,
-    "bottomRow": 19,
+    "bottomRow": 24.2,
     "parentRowSpace": 10,
     "type": "FORM_WIDGET",
     "hideCard": false,
@@ -27,7 +27,7 @@
         "widgetName": "Canvas6",
         "displayName": "Canvas",
         "topRow": 0,
-        "bottomRow": 190,
+        "bottomRow": 242,
         "parentRowSpace": 1,
         "type": "CANVAS_WIDGET",
         "canExtend": false,
@@ -73,6 +73,10 @@
             {"children": [{
                 "id": "p8ud6vc5qr",
                 "align": "end"
+            }]},
+            {"children": [{
+                "id": "lotql0s5as",
+                "align": "start"
             }]}
         ]
     }],

@@ -1,0 +1,36 @@
+{
+  "unpublishedCollection": {
+    "name": "ImportProcess",
+    "pageId": "Home",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "actions": [],
+    "archivedActions": [],
+    "variables": [
+      {
+        "name": "rows",
+        "value": "[]"
+      },
+      {
+        "name": "new_ids",
+        "value": "[]"
+      },
+      {
+        "name": "fields_to_import",
+        "value": "[]"
+      },
+      {
+        "name": "database_id",
+        "value": "''"
+      },
+      {
+        "name": "current_status",
+        "value": "''"
+      }
+    ],
+    "userPermissions": []
+  },
+  "id": "Home_ImportProcess",
+  "deleted": false,
+  "gitSyncId": "6533ac8d517d1f5679b748e5_6537cb81701b44269b39f209"
+}

@@ -6,16 +6,7 @@
     "pluginType": "JS",
     "actions": [],
     "archivedActions": [],
-    "variables": [
-      {
-        "name": "myVar1",
-        "value": "[]"
-      },
-      {
-        "name": "myVar2",
-        "value": "{}"
-      }
-    ],
+    "variables": [],
     "userPermissions": []
   },
   "id": "Home_DownloadExport",

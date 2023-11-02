@@ -1,0 +1,3 @@
+{
+	"data": {{ImportProcess.fields_to_import}}
+}
